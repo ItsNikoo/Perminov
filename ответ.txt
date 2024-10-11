@@ -1,0 +1,46 @@
+------------------- КОД SQL -----------------------------
+
+select * from vlan;
+
+select * from employees;
+
+select * from employee_report;
+
+select * from applications;
+
+select * from statuses;
+
+select * from security_journal
+where discovery_date = '2024-10-10';
+
+select source_pc, pc.ip_address from applications
+join pc on applications.source_pc = pc.id
+where session_time = '17:25';
+
+with test as
+(select source_pc, pc.ip_address from applications
+join pc on applications.source_pc = pc.id
+where session_time = '17:25')
+select * from test
+join employees on test.source_pc = employees.pc;
+
+
+select * from employee_report
+where uid_employee = 5563 or uid_employee = 3242 
+or uid_employee = 1223
+or uid_employee = 1285;
+
+select * from employees
+where name = 'Диана' or surname = 'Требиани';
+
+---------------------------------------------------------------------------
+
+
+Ответ: ip: 10.10.2.26 
+Имя: Дмитрий	Лесных	
+uid:1223	
+Номер компа: 54	
+СТатус: 13
+
+
+Дмитрий Лесных, потому что по его репорту он работал с человеком, который в отпуске. Запрос с with выдал 5 человек, 1 из которых со статусом 14 - не подходит. Двое не поддаются объяснению, третий работал с людьми, котоыре работают в компании. Остается Дмитрий. Вот ответ)
